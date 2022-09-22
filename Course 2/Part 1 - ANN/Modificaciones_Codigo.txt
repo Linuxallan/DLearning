@@ -21,6 +21,19 @@ Aquí te dejo las nuevas versiones del código:
     )
     X = np.array(ct.fit_transform(X), dtype=np.float)
 
+    ## ----- nueva verion para OneHotEncoder
+    from sklearn.preprocessing import OneHotEncoder
+    from sklearn.compose import ColumnTransformer
+    transformer = ColumnTransformer(
+        transformers=[
+            ("Churn_Modelling",        # Un nombre de la transformación
+             OneHotEncoder(categories='auto'), # La clase a la que transformar
+             [1]            # Las columnas a transformar.
+             )
+        ], remainder='passthrough'
+    )
+    X = transformer.fit_transform(X)
+
     Para hacer reemplazo de valores por la media, ahora se utiliza:
 
     from sklearn.impute import SimpleImputer
